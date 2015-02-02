@@ -7,13 +7,13 @@
  * %%
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -33,6 +33,7 @@ package io.scif.formats.imaris;
 import io.scif.FormatException;
 import io.scif.Reader;
 import io.scif.SCIFIO;
+import io.scif.formats.ImarisFormat;
 import io.scif.io.Location;
 
 import java.io.IOException;
@@ -43,9 +44,11 @@ import java.io.IOException;
 public class ImarisWriterTest {
 
 	// for testing
-	public static void main(String[] args) throws IOException, FormatException {
+	public static void main(final String[] args) throws IOException,
+		FormatException
+	{
 		final SCIFIO scifio = new SCIFIO();
-		String name = "mitosis";
+		final String name = "mitosis";
 		final String sampleImage = "/Users/henrypinkard/Desktop/" + name + ".tif";
 		final String outPath = "/Users/henrypinkard/Desktop/" + name + ".ims";
 
