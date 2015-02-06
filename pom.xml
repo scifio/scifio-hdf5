@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>cisd</groupId>
 			<artifactId>jhdf5</artifactId>
-			<version>13.06.2</version>
+			<version>${jhdf5.version}</version>
 			<type>jar</type>
 		</dependency>
 	</dependencies>
