@@ -77,8 +77,6 @@ public class ImarisFormat extends AbstractFormat {
 
 	public static class Writer extends AbstractWriter<DefaultMetadata> {
 
-		private Metadata metadata;
-
 		private ImarisWriter imsWriter;
 		private String path;
 		private int bitDepth;
@@ -94,7 +92,6 @@ public class ImarisFormat extends AbstractFormat {
 		// writer.setDest(destination, config);
 		@Override
 		public void setMetadata(final Metadata meta) throws FormatException {
-			metadata = meta;
 			// read metadata for writer initialization
 			bitDepth = meta.get(0).getBitsPerPixel();
 			sizeX = meta.get(0).getAxisLength(Axes.X);
@@ -109,6 +106,8 @@ public class ImarisFormat extends AbstractFormat {
 			// get pixel sizes
 			pixelSizeXY = FormatTools.getScale(meta, 0, Axes.X);
 			pixelSizeZ = FormatTools.getScale(meta, 0, Axes.Z);
+
+			super.setMetadata(meta);
 
 //		if (metadata != null && metadata != meta) {
 //			try {
@@ -202,7 +201,7 @@ public class ImarisFormat extends AbstractFormat {
 		public void savePlane(final int imageIndex, final long planeIndex,
 			final Plane plane) throws FormatException, IOException
 		{
-			final long[] planeMax = metadata.get(imageIndex).getAxesLengthsPlanar();
+			final long[] planeMax = getMetadata().get(imageIndex).getAxesLengthsPlanar();
 			final long[] planeMin = new long[planeMax.length];
 			savePlane(imageIndex, planeIndex, plane, planeMin, planeMax);
 		}
@@ -223,7 +222,7 @@ public class ImarisFormat extends AbstractFormat {
 			final Plane plane, final long[] planeMin, final long[] planeMax)
 			throws FormatException, IOException
 		{
-			if (!SCIFIOMetadataTools.wholePlane(imageIndex, metadata, planeMin,
+			if (!SCIFIOMetadataTools.wholePlane(imageIndex, getMetadata(), planeMin,
 				planeMax))
 			{
 				throw new FormatException(
