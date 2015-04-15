@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>scifio-hdf5</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
@@ -60,13 +60,13 @@
 			<id>henrypinkard</id>
 			<name>Henry Pinkard</name>
 			<email>henry.pinkard@gmail.com</email>
-			<url></url>
-			<organization></organization>
-			<organizationUrl></organizationUrl>
+			<url />
+			<organization />
+			<organizationUrl />
 			<roles>
 				<role>developer</role>
 			</roles>
-			<timezone></timezone>
+			<timezone />
 		</developer>
 	</developers>
 </project>
