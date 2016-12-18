@@ -15,18 +15,31 @@
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
 
+	<developers>
+		<developer>
+			<id>henrypinkard</id>
+			<name>Henry Pinkard</name>
+			<email>henry.pinkard@gmail.com</email>
+			<url />
+			<organization />
+			<organizationUrl />
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone />
+		</developer>
+	</developers>
+
 	<scm>
 		<connection>scm:git:git://github.com/scifio/scifio-hdf5</connection>
 		<developerConnection>scm:git:git@github.com:scifio/scifio-hdf5</developerConnection>
 		<tag>HEAD</tag>
 		<url>http://github.com/scifio/scifio-hdf5</url>
 	</scm>
-
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/scifio/scifio-hdf5/issues</url>
 	</issueManagement>
-
 	<ciManagement>
 		<system>Jenkins</system>
 		<url>http://jenkins.imagej.net/job/scifio-hdf5/</url>
@@ -54,19 +67,4 @@
 			<type>jar</type>
 		</dependency>
 	</dependencies>
-
-	<developers>
-		<developer>
-			<id>henrypinkard</id>
-			<name>Henry Pinkard</name>
-			<email>henry.pinkard@gmail.com</email>
-			<url />
-			<organization />
-			<organizationUrl />
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone />
-		</developer>
-	</developers>
 </project>
