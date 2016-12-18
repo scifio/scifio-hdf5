@@ -20,10 +20,28 @@
 			<id>henrypinkard</id>
 			<name>Henry Pinkard</name>
 			<roles>
-				<role>developer</role>
+				<role>founder</role>
+				<role>debugger</role>
+				<role>reviewer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>ctrueden</id>
+			<name>Curtis Rueden</name>
+			<url>http://imagej.net/User:Rueden</url>
+			<roles>
+				<role>maintainer</role>
 			</roles>
 		</developer>
 	</developers>
+	<contributors>
+		<contributor>
+			<name>Mark Hiner</name>
+			<url>http://imagej.net/User:Hinerm</url>
+			<roles><role>founder</role></roles>
+			<properties><id>hinerm</id></properties>
+		</contributor>
+	</contributors>
 
 	<scm>
 		<connection>scm:git:git://github.com/scifio/scifio-hdf5</connection>
