@@ -3,22 +3,36 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.scif</groupId>
-		<artifactId>pom-scifio</artifactId>
-		<version>7.0.0</version>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>12.0.0</version>
 		<relativePath />
 	</parent>
 
+	<groupId>io.scif</groupId>
 	<artifactId>scifio-hdf5</artifactId>
 	<version>0.1.2-SNAPSHOT</version>
 
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
+	<url>http://imagej.net/SCIFIO_HDF5</url>
+	<inceptionYear>2011</inceptionYear>
+	<organization>
+		<name>SCIFIO</name>
+		<url>http://scif.io/</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>Simplified BSD License</name>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<developers>
 		<developer>
 			<id>henrypinkard</id>
 			<name>Henry Pinkard</name>
+			<url>http://imagej.net/User:HPinkard</url>
 			<roles>
 				<role>founder</role>
 				<role>debugger</role>
@@ -43,6 +57,13 @@
 		</contributor>
 	</contributors>
 
+	<mailingLists>
+		<mailingList>
+			<name>ImageJ Forum</name>
+			<archive>http://forum.imagej.net/</archive>
+		</mailingList>
+	</mailingLists>
+
 	<scm>
 		<connection>scm:git:git://github.com/scifio/scifio-hdf5</connection>
 		<developerConnection>scm:git:git@github.com:scifio/scifio-hdf5</developerConnection>
@@ -57,6 +78,14 @@
 		<system>Jenkins</system>
 		<url>http://jenkins.imagej.net/job/scifio-hdf5/</url>
 	</ciManagement>
+
+	<properties>
+		<package-name>io.scif.formats</package-name>
+		<license.licenseName>bsd_2</license.licenseName>
+		<license.copyrightOwners>UC Berkeley and Board of Regents of
+the University of Wisconsin-Madison.</license.copyrightOwners>
+		<license.projectName>SCIFIO library for reading and converting scientific file formats.</license.projectName>
+	</properties>
 
 	<repositories>
 		<repository>
