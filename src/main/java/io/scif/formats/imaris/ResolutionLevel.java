@@ -2,8 +2,8 @@
  * #%L
  * SCIFIO library for reading and converting scientific file formats.
  * %%
- * Copyright (C) 2011 - 2016 Board of Regents of the University of
- * Wisconsin-Madison
+ * Copyright (C) 2011 - 2016 UC Berkeley and Board of Regents of
+ * the University of Wisconsin-Madison.
  * %%
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
