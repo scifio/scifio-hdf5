@@ -54,6 +54,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import net.imagej.axis.Axes;
+import net.imglib2.Interval;
 
 import org.scijava.plugin.Plugin;
 
@@ -190,8 +191,7 @@ public class ImarisFormat extends AbstractFormat {
 		// ///////////////
 		@Override
 		protected void initialize(final int imageIndex, final long planeIndex,
-			final long[] planeMin, final long[] planeMax) throws FormatException,
-			IOException
+			final Interval bounds) throws FormatException, IOException
 		{
 			// nothing to do
 		}
@@ -201,9 +201,7 @@ public class ImarisFormat extends AbstractFormat {
 		public void savePlane(final int imageIndex, final long planeIndex,
 			final Plane plane) throws FormatException, IOException
 		{
-			final long[] planeMax = getMetadata().get(imageIndex).getAxesLengthsPlanar();
-			final long[] planeMin = new long[planeMax.length];
-			savePlane(imageIndex, planeIndex, plane, planeMin, planeMax);
+			savePlane(imageIndex, planeIndex, plane, plane.getBounds());
 		}
 
 		@Override
@@ -219,11 +217,10 @@ public class ImarisFormat extends AbstractFormat {
 		// write it to the given indices on disk.
 		@Override
 		public void writePlane(final int imageIndex, final long planeIndex,
-			final Plane plane, final long[] planeMin, final long[] planeMax)
-			throws FormatException, IOException
+			final Plane plane, final Interval bounds) throws FormatException,
+			IOException
 		{
-			if (!SCIFIOMetadataTools.wholePlane(imageIndex, getMetadata(), planeMin,
-				planeMax))
+			if (!SCIFIOMetadataTools.wholePlane(imageIndex, getMetadata(), bounds))
 			{
 				throw new FormatException(
 					"Imaris writer does not support saving image tiles.");
