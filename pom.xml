@@ -15,7 +15,7 @@
 
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
-	<url>http://imagej.net/SCIFIO_HDF5</url>
+	<url>https://imagej.net/SCIFIO_HDF5</url>
 	<inceptionYear>2011</inceptionYear>
 	<organization>
 		<name>SCIFIO</name>
@@ -32,7 +32,7 @@
 		<developer>
 			<id>henrypinkard</id>
 			<name>Henry Pinkard</name>
-			<url>http://imagej.net/User:HPinkard</url>
+			<url>https://imagej.net/User:HPinkard</url>
 			<roles>
 				<role>founder</role>
 				<role>debugger</role>
@@ -42,7 +42,7 @@
 		<developer>
 			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
-			<url>http://imagej.net/User:Rueden</url>
+			<url>https://imagej.net/User:Rueden</url>
 			<roles>
 				<role>maintainer</role>
 			</roles>
@@ -51,7 +51,7 @@
 	<contributors>
 		<contributor>
 			<name>Mark Hiner</name>
-			<url>http://imagej.net/User:Hinerm</url>
+			<url>https://imagej.net/User:Hinerm</url>
 			<roles><role>founder</role></roles>
 			<properties><id>hinerm</id></properties>
 		</contributor>
@@ -93,7 +93,7 @@ the University of Wisconsin-Madison.</license.copyrightOwners>
 	<repositories>
 		<repository>
 			<id>imagej.public</id>
-			<url>http://maven.imagej.net/content/groups/public</url>
+			<url>https://maven.imagej.net/content/groups/public</url>
 		</repository>
 	</repositories>
 
