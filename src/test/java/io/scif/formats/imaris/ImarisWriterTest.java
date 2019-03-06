@@ -34,9 +34,11 @@ import io.scif.FormatException;
 import io.scif.Reader;
 import io.scif.SCIFIO;
 import io.scif.formats.ImarisFormat;
-import io.scif.io.Location;
 
 import java.io.IOException;
+
+import org.scijava.io.location.FileLocation;
+import org.scijava.io.location.Location;
 
 /**
  * Manual testing for the {@link ImarisFormat} writer.
@@ -52,13 +54,12 @@ public class ImarisWriterTest {
 		final String sampleImage = "/Users/henrypinkard/Desktop/" + name + ".tif";
 		final String outPath = "/Users/henrypinkard/Desktop/" + name + ".ims";
 
-		final Location l = new Location(scifio.getContext(), outPath);
-		if (l.exists()) {
-			l.delete();
-		}
-		final Reader reader = scifio.initializer().initializeReader(sampleImage);
+		final Location l = new FileLocation(outPath);
+		final Location sample = new FileLocation(sampleImage);
+	
+		final Reader reader = scifio.initializer().initializeReader(sample);
 		final io.scif.Writer writer =
-			scifio.initializer().initializeWriter(sampleImage, outPath);
+			scifio.initializer().initializeWriter(sample, l);
 		for (int i = 0; i < reader.getImageCount(); i++) {
 			for (int j = 0; j < reader.getPlaneCount(i); j++) {
 				writer.savePlane(i, j, reader.openPlane(i, j));

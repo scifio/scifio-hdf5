@@ -11,7 +11,7 @@
 
 	<groupId>io.scif</groupId>
 	<artifactId>scifio-hdf5</artifactId>
-	<version>0.1.4-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
@@ -88,6 +88,8 @@ the University of Wisconsin-Madison.</license.copyrightOwners>
 
 		<!-- NB: Deploy releases to the ImageJ Maven repository. -->
 		<releaseProfiles>deploy-to-imagej</releaseProfiles>
+
+		<scifio.version>0.38.0</scifio.version>
 	</properties>
 
 	<repositories>
