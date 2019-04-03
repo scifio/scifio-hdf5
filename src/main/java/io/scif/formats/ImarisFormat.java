@@ -44,7 +44,6 @@ import io.scif.Metadata;
 import io.scif.Plane;
 import io.scif.config.SCIFIOConfig;
 import io.scif.formats.imaris.ImarisWriter;
-import io.scif.io.RandomAccessOutputStream;
 import io.scif.util.FormatTools;
 import io.scif.util.SCIFIOMetadataTools;
 
@@ -56,6 +55,9 @@ import java.nio.ByteOrder;
 import net.imagej.axis.Axes;
 import net.imglib2.Interval;
 
+import org.scijava.io.handle.DataHandle;
+import org.scijava.io.location.FileLocation;
+import org.scijava.io.location.Location;
 import org.scijava.plugin.Plugin;
 
 /**
@@ -142,17 +144,21 @@ public class ImarisFormat extends AbstractFormat {
 		}
 
 		@Override
-		public void setDest(final String fileName, final int imageIndex,
+		public void setDest(final Location fileName, final int imageIndex,
 			final SCIFIOConfig config) throws FormatException, IOException
 		{
-			path = fileName;
+			if(fileName instanceof FileLocation) {
+				path = ((FileLocation)fileName).getFile().getAbsolutePath();
+			} else {
+				throw new IllegalArgumentException("Imaris format only supports local files!");
+			}
 			// Imaris writier uses JNI calls rather than output stream to write data,
 			// override this method and don't unnecessarily create object
-			setDest((RandomAccessOutputStream) null, imageIndex, config);
+			setDest((DataHandle<Location>) null, imageIndex, config);
 		}
 
 		@Override
-		public void setDest(final RandomAccessOutputStream out,
+		public void setDest(final DataHandle<Location> out,
 			final int imageIndex, final SCIFIOConfig config) throws FormatException,
 			IOException
 		{
@@ -225,6 +231,7 @@ public class ImarisFormat extends AbstractFormat {
 				throw new FormatException(
 					"Imaris writer does not support saving image tiles.");
 			}
+			
 			if (imsWriter == null) {
 				imsWriter =
 					new ImarisWriter(path, sizeX, sizeY, sizeZ, sizeC, sizeT,
