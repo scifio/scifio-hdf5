@@ -11,7 +11,7 @@
 
 	<groupId>io.scif</groupId>
 	<artifactId>scifio-hdf5</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>0.2.0</version>
 
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
@@ -67,7 +67,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/scifio/scifio-hdf5</connection>
 		<developerConnection>scm:git:git@github.com:scifio/scifio-hdf5</developerConnection>
-		<tag>HEAD</tag>
+		<tag>scifio-hdf5-0.2.0</tag>
 		<url>http://github.com/scifio/scifio-hdf5</url>
 	</scm>
 	<issueManagement>
