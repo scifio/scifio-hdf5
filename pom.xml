@@ -68,7 +68,7 @@
 		<connection>scm:git:git://github.com/scifio/scifio-hdf5</connection>
 		<developerConnection>scm:git:git@github.com:scifio/scifio-hdf5</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://github.com/scifio/scifio-hdf5</url>
+		<url>https://github.com/scifio/scifio-hdf5</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
