@@ -32,7 +32,7 @@
 		<developer>
 			<id>henrypinkard</id>
 			<name>Henry Pinkard</name>
-			<url>https://imagej.net/User:HPinkard</url>
+			<url>https://imagej.net/people/henrypinkard</url>
 			<roles>
 				<role>founder</role>
 				<role>debugger</role>
@@ -42,7 +42,7 @@
 		<developer>
 			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
-			<url>https://imagej.net/User:Rueden</url>
+			<url>https://imagej.net/people/ctrueden</url>
 			<roles>
 				<role>maintainer</role>
 			</roles>
@@ -51,7 +51,7 @@
 	<contributors>
 		<contributor>
 			<name>Mark Hiner</name>
-			<url>https://imagej.net/User:Hinerm</url>
+			<url>https://imagej.net/people/hinerm</url>
 			<roles><role>founder</role></roles>
 			<properties><id>hinerm</id></properties>
 		</contributor>
