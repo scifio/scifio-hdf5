@@ -15,7 +15,7 @@
 
 	<name>SCIFIO HDF5</name>
 	<description>SCIFIO plugins for HDF5-based formats.</description>
-	<url>https://imagej.net/SCIFIO_HDF5</url>
+	<url>https://github.com/scifio/scifio-hdf5</url>
 	<inceptionYear>2011</inceptionYear>
 	<organization>
 		<name>SCIFIO</name>
