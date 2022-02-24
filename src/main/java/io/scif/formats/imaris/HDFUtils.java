@@ -33,10 +33,10 @@ import java.io.UnsupportedEncodingException;
 
 import javax.swing.JOptionPane;
 
-import ncsa.hdf.hdf5lib.H5;
-import ncsa.hdf.hdf5lib.HDF5Constants;
-import ncsa.hdf.hdf5lib.exceptions.HDF5Exception;
-import ncsa.hdf.hdf5lib.exceptions.HDF5LibraryException;
+import hdf.hdf5lib.H5;
+import hdf.hdf5lib.HDF5Constants;
+import hdf.hdf5lib.exceptions.HDF5Exception;
+import hdf.hdf5lib.exceptions.HDF5LibraryException;
 
 /**
  * @author henrypinkard
@@ -44,67 +44,67 @@ import ncsa.hdf.hdf5lib.exceptions.HDF5LibraryException;
 public class HDFUtils {
 
 	// Return dataspace, datatype, dataset IDs
-	public static int[] createDataSet(final int locationID, final String name,
-		final long[] size, final int type) throws HDF5LibraryException,
+	public static long[] createDataSet(final long id, final String name,
+		final long[] size, final long l) throws HDF5LibraryException,
 		HDF5Exception
 	{
 
 		// 1) Create and initialize a dataspace for the dataset
 		// number of dimensions, array with size of each dimension, array with max
 		// size of each dimension
-		final int dataSpaceID = H5.H5Screate_simple(size.length, size, null);
+		final long dataSpaceID = H5.H5Screate_simple(size.length, size, null);
 
 		// 2) Define a datatype for the dataset by using method that copies existing
 		// datatype
-		final int dataTypeID = H5.H5Tcopy(type);
+		final long dataTypeID = H5.H5Tcopy(l);
 		H5.H5Tset_order(dataTypeID, HDF5Constants.H5T_ORDER_LE);
 
 		// 3) Create and initialize the dataset
-		final int dataSetID =
-			H5.H5Dcreate(locationID, name, dataTypeID, dataSpaceID,
+		final long dataSetID =
+			H5.H5Dcreate(id, name, dataTypeID, dataSpaceID,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT);
 
-		return new int[] { dataSpaceID, dataTypeID, dataSetID };
+		return new long[] { dataSpaceID, dataTypeID, dataSetID };
 	}
 
-	public static int[] createCompressedDataSet(final int locationID,
-		final String name, final long[] size, final int type, final long[] chunk)
+	public static long[] createCompressedDataSet(final long id,
+		final String name, final long[] size, final long l, final long[] chunk)
 		throws HDF5LibraryException, HDF5Exception
 	{
 
 		// 1) Create and initialize a dataspace for the dataset
 		// number of dimensions, array with size of each dimension, array with max
 		// size of each dimension
-		final int dataSpaceID = H5.H5Screate_simple(size.length, size, null);
+		final long dataSpaceID = H5.H5Screate_simple(size.length, size, null);
 
 		// 2) Define a datatype for the dataset by using method that copies existing
 		// datatype
-		final int dataTypeID = H5.H5Tcopy(type);
+		final long dataTypeID = H5.H5Tcopy(l);
 		H5.H5Tset_order(dataTypeID, HDF5Constants.H5T_ORDER_LE);
 
 		// Optionally create property list specifiying compression
-		final int propListID = H5.H5Pcreate(HDF5Constants.H5P_DATASET_CREATE);
+		final long propListID = H5.H5Pcreate(HDF5Constants.H5P_DATASET_CREATE);
 		H5.H5Pset_deflate(propListID, 2);
 		H5.H5Pset_chunk(propListID, chunk.length, chunk);
 
 		// 3) Create and initialize the dataset
-		final int dataSetID =
-			H5.H5Dcreate(locationID, name, dataTypeID, dataSpaceID,
+		final long dataSetID =
+			H5.H5Dcreate(id, name, dataTypeID, dataSpaceID,
 				HDF5Constants.H5P_DEFAULT, propListID, HDF5Constants.H5P_DEFAULT);
 
-		return new int[] { dataSpaceID, dataTypeID, dataSetID, propListID };
+		return new long[] { dataSpaceID, dataTypeID, dataSetID, propListID };
 	}
 
-	public static void writeStringAttribute(final int objectID,
+	public static void writeStringAttribute(final long id,
 		final String name, final String value) throws HDF5LibraryException,
 		HDF5Exception
 	{
 		// Create dataspace for attribute
-		final int dataspaceID =
+		final long dataspaceID =
 			H5.H5Screate_simple(1, new long[] { value.length() }, null);
-		final int attID =
-			H5.H5Acreate(objectID, name, HDF5Constants.H5T_C_S1, dataspaceID,
+		final long attID =
+			H5.H5Acreate(id, name, HDF5Constants.H5T_C_S1, dataspaceID,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 		try {
 			H5.H5Awrite(attID, HDF5Constants.H5T_C_S1, value.getBytes("US-ASCII"));

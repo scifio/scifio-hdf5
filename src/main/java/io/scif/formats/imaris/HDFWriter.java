@@ -34,10 +34,10 @@ import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 
-import ncsa.hdf.hdf5lib.H5;
-import ncsa.hdf.hdf5lib.HDF5Constants;
-import ncsa.hdf.hdf5lib.exceptions.HDF5Exception;
-import ncsa.hdf.hdf5lib.exceptions.HDF5LibraryException;
+import hdf.hdf5lib.H5;
+import hdf.hdf5lib.HDF5Constants;
+import hdf.hdf5lib.exceptions.HDF5Exception;
+import hdf.hdf5lib.exceptions.HDF5LibraryException;
 
 public class HDFWriter {
 
@@ -50,11 +50,11 @@ public class HDFWriter {
 	private final int numChannels_, numFrames_;
 	private final int imageWidth_, imageHeight_, numSlices_;
 	private final double pixelSize_, pixelSizeZ_;
-	private int fileID_;
-	private int timeInfoID_;
+	private long fileID_;
+	private long timeInfoID_;
 	private final DecimalFormat numberFormat_ = new DecimalFormat("#.###");
 	private final ResolutionLevel[] resLevels_;
-	private int[] resLevelIDs_;
+	private long[] resLevelIDs_;
 	private final String path_;
 	private TimePoint currentTimePoint_;
 	private int timePointImageCount_ = 0;
@@ -98,7 +98,7 @@ public class HDFWriter {
 			}
 
 			H5.H5Gclose(timeInfoID_);
-			for (final int id : resLevelIDs_) {
+			for (final long id : resLevelIDs_) {
 				H5.H5Gclose(id);
 			}
 			H5.H5Fclose(fileID_);
@@ -154,7 +154,7 @@ public class HDFWriter {
 	private void createFile() {
 		try {
 			fileID_ =
-				H5.H5Fcreate(path_, HDF5Constants.H5P_DEFAULT,
+				H5.H5Fcreate(path_, (int) HDF5Constants.H5P_DEFAULT,
 					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 			addRootAttributes();
 			makeDataSetInfo();
@@ -174,8 +174,8 @@ public class HDFWriter {
 		HDFUtils.writeStringAttribute(fileID_, "ImarisVersion", "5.5.0");
 //      HDFUtils.writeStringAttribute(fileID_, "ThumbnailDirectoryName", "Thumbnail");
 		// Create number of datasets attribute
-		final int dataspaceID = H5.H5Screate_simple(1, new long[] { 1 }, null);
-		final int attID =
+		final long dataspaceID = H5.H5Screate_simple(1, new long[] { 1 }, null);
+		final long attID =
 			H5.H5Acreate(fileID_, "NumberOfDataSets",
 				HDF5Constants.H5T_NATIVE_UINT32, dataspaceID,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
@@ -189,12 +189,12 @@ public class HDFWriter {
 	private void makeDataSetInfo() throws NullPointerException,
 		HDF5LibraryException, HDF5Exception
 	{
-		final int dataSetGroupID =
+		final long dataSetGroupID =
 			H5.H5Gcreate(fileID_, "/DataSetInfo", HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 		// Channels
 		for (int c = 0; c < numChannels_; c++) {
-			final int channelID =
+			final long channelID =
 				H5.H5Gcreate(dataSetGroupID, "Channel " + c, HDF5Constants.H5P_DEFAULT,
 					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 			final float[] rgb =
@@ -215,7 +215,7 @@ public class HDFWriter {
 		}
 
 		// Image
-		final int imageID =
+		final long imageID =
 			H5.H5Gcreate(dataSetGroupID, "Image", HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 		HDFUtils.writeStringAttribute(imageID, "Description",
@@ -240,14 +240,14 @@ public class HDFWriter {
 		H5.H5Gclose(imageID);
 
 		// Imaris
-		final int imarisID =
+		final long imarisID =
 			H5.H5Gcreate(dataSetGroupID, "Imaris", HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 		HDFUtils.writeStringAttribute(imarisID, "Version", VERSION);
 		H5.H5Gclose(imarisID);
 
 		// ImarisDataSet
-		final int imarisDSID =
+		final long imarisDSID =
 			H5.H5Gcreate(dataSetGroupID, "ImarisDataSet", HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 		HDFUtils.writeStringAttribute(imarisDSID, "Creator", "Imaricumpiler");
@@ -256,7 +256,7 @@ public class HDFWriter {
 		H5.H5Gclose(imarisDSID);
 
 		// Log
-		final int logID =
+		final long logID =
 			H5.H5Gcreate(dataSetGroupID, "Log", HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 		HDFUtils.writeStringAttribute(logID, "Entries", "0");
@@ -278,9 +278,9 @@ public class HDFWriter {
 	private void makeDataSet() throws NullPointerException, HDF5LibraryException,
 		HDF5Exception
 	{
-		resLevelIDs_ = new int[resLevels_.length];
+		resLevelIDs_ = new long[resLevels_.length];
 
-		final int dataSetGroupID =
+		final long dataSetGroupID =
 			H5.H5Gcreate(fileID_, "/DataSet", HDF5Constants.H5P_DEFAULT,
 				HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT);
 

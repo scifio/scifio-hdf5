@@ -32,10 +32,10 @@ package io.scif.formats.imaris;
 //This class encapsulates all the data object IDs for a given timepoint
 import javax.swing.JOptionPane;
 
-import ncsa.hdf.hdf5lib.H5;
-import ncsa.hdf.hdf5lib.HDF5Constants;
-import ncsa.hdf.hdf5lib.exceptions.HDF5Exception;
-import ncsa.hdf.hdf5lib.exceptions.HDF5LibraryException;
+import hdf.hdf5lib.H5;
+import hdf.hdf5lib.HDF5Constants;
+import hdf.hdf5lib.exceptions.HDF5Exception;
+import hdf.hdf5lib.exceptions.HDF5LibraryException;
 
 public class TimePoint {
 
@@ -46,7 +46,7 @@ public class TimePoint {
 	private final boolean compressImageData_;
 
 	// Constructor creates all data structures that are populated later
-	public TimePoint(final ResolutionLevel[] resLevels, final int[] resLevelIDs,
+	public TimePoint(final ResolutionLevel[] resLevels, final long[] resLevelIDs_,
 		final int numChannels, final int frameIndex, final int bitDepth,
 		final boolean compressImageData) throws HDF5LibraryException, HDF5Exception
 	{
@@ -56,8 +56,8 @@ public class TimePoint {
 
 		for (int resIndex = 0; resIndex < resLevels.length; resIndex++) {
 			// Create time point
-			final int timePointID =
-				H5.H5Gcreate(resLevelIDs[resIndex], "TimePoint " + frameIndex,
+			final long timePointID =
+				H5.H5Gcreate(resLevelIDs_[resIndex], "TimePoint " + frameIndex,
 					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT,
 					HDF5Constants.H5P_DEFAULT);
 
@@ -116,15 +116,15 @@ public class TimePoint {
 	private class ChannelGroup {
 
 		private final ResolutionLevel resLevel_;
-		private int[] histogramIDs_;
-		private int[] imageDataIDs_;
+		private long[] histogramIDs_;
+		private long[] imageDataIDs_;
 
-		public ChannelGroup(final int timePointID, final int channelIndex,
+		public ChannelGroup(final long timePointID, final int channelIndex,
 			final ResolutionLevel resLevel, final int bitDepth)
 			throws HDF5LibraryException, HDF5Exception
 		{
 			resLevel_ = resLevel;
-			final int id =
+			final long id =
 				H5.H5Gcreate(timePointID, "Channel " + channelIndex,
 					HDF5Constants.H5P_DEFAULT, HDF5Constants.H5P_DEFAULT,
 					HDF5Constants.H5P_DEFAULT);
@@ -176,7 +176,7 @@ public class TimePoint {
 			throws HDF5LibraryException, HDF5Exception
 		{
 //         Write and close histogram
-			final int memDataSpaceID =
+			final long memDataSpaceID =
 				H5.H5Screate_simple(1, new long[] { HISTOGRAM_SIZE }, null);
 			try {
 				final long[] histogram = img.histograms[resIndex];
@@ -227,7 +227,7 @@ public class TimePoint {
 					start, null, count, null);
 
 			// Create dataspace in memory to copy from
-			final int memDataSpaceID =
+			final long memDataSpaceID =
 				H5.H5Screate_simple(1, new long[] { width * height }, null);
 			ret = H5.H5Sselect_all(memDataSpaceID);
 
